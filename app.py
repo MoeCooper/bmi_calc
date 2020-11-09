@@ -17,18 +17,22 @@ def calculate():
         height = float(request.form.get("userheight"))
         weight = float(request.form.get("userweight"))
         bmi = calculate_bmi(height, weight)
-        print(name, height, weight)
-        for name, weight, height in data:
-            data.insert(name, height, weight)
-        work_book = Workbook()
-        work_sheet = work_book.active
-
-        work_sheet.append(["name", "height", "weight"])
-        work_sheet.append([name, height, weight])
-
-        work_book.save("bmi_stats.xlsx")
-        os.system("bmi_stats.xlsx")
+        print(name, height, weight, bmi)
+        save_to_excel(name, height, weight, bmi, data)
     return render_template("index.html", user_name=name, user_height=height, user_weight=weight, user_bmi=bmi)
+
+
+def save_to_excel(name, height, weight, bmi, data):
+    for name, weight, height, bmi in data:
+        data.insert(name, height, weight, bmi)
+    work_book = Workbook()
+    work_sheet = work_book.active
+
+    work_sheet.append(["Name", "Height", "Weight", "BMI"])
+    work_sheet.append([name, height, weight, bmi])
+
+    work_book.save("bmi_stats.xlsx")
+    os.system("bmi_stats.xlsx")
 
 
 def calculate_bmi(height, weight):

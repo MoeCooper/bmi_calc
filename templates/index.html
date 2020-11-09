@@ -20,12 +20,8 @@
     </div>
 
     <div>
-        <!--{% if user_bmi %}-->
-            {% for person in data %}
-            <p>Your calculated BMI is {{ person.name }}</p>
-            <p>Your calculated BMI is {{ person.name }}</p>
-            <p>Your calculated BMI is {{ person.name }}</p>
-            <p>Your calculated BMI is {{ person.name }}</p>
+        {% if user_bmi %}
+            <p>Your BMI is {{ user_bmi }}</p>
         {% endif %}
     </div>
 </body>
